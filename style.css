@@ -7,11 +7,12 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:1rem;line-height:1.7;color:var(--g900);background:#fff;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans KR',sans-serif;font-size:1rem;line-height:1.7;color:var(--g900);background:#fff;-webkit-font-smoothing:antialiased;padding-bottom:96px}
 /* Kill any floating widgets/popups */
 .scroll-top,.cookie-popup,.floating-widget,.popup-banner{display:none!important}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--navy);text-decoration:none}
+.nav-inner a,.bc a,.card-link,.btn-ai,.btn-alert,.back-link,.hd-cta,.ft a{min-height:44px;display:inline-flex;align-items:center}
 button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inherit;font-size:1rem}
 
 /* HEADER */
@@ -56,7 +57,7 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 .card-img .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.125rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--navy),#3a5a8a)}
 .badge{position:absolute;top:.75rem;left:.75rem;font-size:.75rem;font-weight:700;padding:4px 8px;border-radius:4px;color:#fff;z-index:2}
 .badge-selling{background:var(--green)}
-.badge-upcoming{background:var(--yellow)}
+.badge-upcoming{background:#1E40AF;color:#fff}
 .badge-closing{background:var(--red)}
 .card-type{position:absolute;top:.75rem;right:.75rem;background:rgba(0,0,0,.6);color:#fff;font-size:.75rem;font-weight:600;padding:2px 6px;border-radius:4px}
 .card-body{padding:1rem}
@@ -102,7 +103,7 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 /* BOTTOM FIXED BARS — NO OVERLAP */
 .bottom-phone{position:fixed;bottom:48px;left:0;width:100%;height:48px;background:#111;display:flex;align-items:center;justify-content:center;gap:.75rem;z-index:9999;padding:0 1rem}
 .bottom-phone a{color:#fff;font-size:20px;font-weight:900;text-decoration:none;display:inline-flex;align-items:center;gap:.375rem;min-height:48px}
-.bottom-phone .email{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.7)}
+.bottom-phone .email{font-size:.75rem;font-weight:600;color:#fff}
 .bottom-main{position:fixed;bottom:0;left:0;width:100%;height:48px;background:#2563EB;display:flex;align-items:center;justify-content:center;z-index:9999}
 .bottom-main a{color:#fff;font-size:16px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:.375rem;min-height:48px}
 
