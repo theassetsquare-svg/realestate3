@@ -62,7 +62,41 @@ function initGalleries(){
   });
 }
 
+/* Price Simulator */
+function initSimulators(){
+  document.querySelectorAll('.sim').forEach(function(sim){
+    var priceInput=sim.querySelector('.sim-price');
+    var downInput=sim.querySelector('.sim-down');
+    var rateInput=sim.querySelector('.sim-rate');
+    var yearInput=sim.querySelector('.sim-year');
+    var resultEl=sim.querySelector('.sim-amount');
+    var totalEl=sim.querySelector('.sim-total');
+    if(!priceInput||!resultEl)return;
+
+    function calc(){
+      var price=parseFloat(priceInput.value)*10000||0;
+      var downPct=parseFloat(downInput?downInput.value:20)||20;
+      var rate=parseFloat(rateInput?rateInput.value:3.5)||3.5;
+      var years=parseInt(yearInput?yearInput.value:30)||30;
+      var loan=price*(1-downPct/100);
+      var monthlyRate=rate/100/12;
+      var n=years*12;
+      var monthly=0;
+      if(monthlyRate>0&&n>0){
+        monthly=loan*monthlyRate*Math.pow(1+monthlyRate,n)/(Math.pow(1+monthlyRate,n)-1);
+      }
+      resultEl.textContent=Math.round(monthly).toLocaleString('ko-KR')+'원';
+      if(totalEl)totalEl.textContent='총 대출금: '+(loan/10000).toFixed(0)+'만원 · 자기자금: '+((price-loan)/10000).toFixed(0)+'만원';
+    }
+
+    [priceInput,downInput,rateInput,yearInput].forEach(function(el){
+      if(el)el.addEventListener('input',calc);
+    });
+    calc();
+  });
+}
+
 /* Init */
-function init(){initChecklists();initGalleries()}
+function init(){initChecklists();initGalleries();initSimulators()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

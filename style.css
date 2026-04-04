@@ -165,3 +165,57 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 
 /* Reduce motion for accessibility */
 @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+/* PRICE SIMULATOR */
+.sim{background:var(--g50);border-radius:var(--r);padding:1.5rem;margin-bottom:2.5rem}
+.sim h2{font-size:1.25rem;font-weight:800;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)}
+.sim-row{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1rem}
+.sim-field{flex:1;min-width:140px}
+.sim-field label{display:block;font-size:.75rem;color:var(--g500);margin-bottom:.25rem;font-weight:600}
+.sim-field input,.sim-field select{width:100%;padding:.625rem;border:1px solid var(--g300);border-radius:8px;font-size:1rem;font-family:inherit;min-height:44px}
+.sim-field input:focus,.sim-field select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+.sim-result{background:var(--navy);color:#fff;border-radius:8px;padding:1rem 1.25rem;text-align:center}
+.sim-result .amount{font-size:1.5rem;font-weight:800;color:var(--gold);display:block;margin:.25rem 0}
+.sim-result .sub{font-size:.8125rem;opacity:.7}
+
+/* COMPARISON TABLE */
+.cmp{margin-bottom:2.5rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cmp h2{font-size:1.25rem;font-weight:800;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)}
+.cmp table{width:100%;border-collapse:collapse;min-width:400px}
+.cmp th,.cmp td{padding:.625rem .75rem;text-align:left;border-bottom:1px solid var(--g200);font-size:.875rem}
+.cmp th{background:var(--g50);font-weight:700;color:var(--g700);white-space:nowrap}
+.cmp thead th{background:var(--navy);color:#fff;font-weight:700}
+.cmp .this{background:rgba(37,99,235,.06);font-weight:700}
+.cmp .highlight{color:var(--blue);font-weight:700}
+
+/* TIMELINE */
+.timeline{margin-bottom:2.5rem}
+.timeline h2{font-size:1.25rem;font-weight:800;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)}
+.tl-track{position:relative;padding-left:2rem}
+.tl-track::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:2px;background:var(--g200)}
+.tl-item{position:relative;padding-bottom:1.5rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-1.625rem;top:.25rem;width:12px;height:12px;border-radius:50%;background:var(--g300);border:2px solid #fff;box-shadow:0 0 0 2px var(--g300);z-index:1}
+.tl-item.active::before{background:var(--blue);box-shadow:0 0 0 2px var(--blue)}
+.tl-item.done::before{background:var(--green);box-shadow:0 0 0 2px var(--green)}
+.tl-date{font-size:.75rem;font-weight:700;color:var(--blue);margin-bottom:.125rem}
+.tl-title{font-size:.9375rem;font-weight:700;margin-bottom:.125rem}
+.tl-desc{font-size:.8125rem;color:var(--g500);line-height:1.5}
+
+/* NEIGHBORHOOD */
+.nbr{background:var(--g50);border-radius:var(--r);padding:1.25rem;margin-bottom:2.5rem}
+.nbr h2{font-size:1.25rem;font-weight:800;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold)}
+.nbr-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(min-width:640px){.nbr-grid{grid-template-columns:repeat(4,1fr)}}
+.nbr-cat{background:#fff;border-radius:8px;padding:.75rem;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.nbr-cat .icon{font-size:1.5rem;margin-bottom:.25rem}
+.nbr-cat .cat-name{font-size:.75rem;font-weight:700;color:var(--g700);margin-bottom:.375rem}
+.nbr-cat ul{list-style:none;font-size:.75rem;color:var(--g500);line-height:1.6}
+
+/* EXPERT QUOTE */
+.expert{background:linear-gradient(135deg,var(--navy),#2a3a6a);color:#fff;border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:2.5rem;position:relative}
+.expert::before{content:'"';font-size:3rem;font-weight:800;color:var(--gold);opacity:.5;position:absolute;top:.25rem;left:.75rem;line-height:1}
+.expert h2{font-size:1rem;font-weight:800;color:var(--gold);margin-bottom:.75rem}
+.expert ul{list-style:none;padding-left:1rem}
+.expert li{font-size:.9375rem;line-height:1.7;padding:.25rem 0;position:relative}
+.expert li::before{content:'→';position:absolute;left:-1rem;color:var(--gold)}
