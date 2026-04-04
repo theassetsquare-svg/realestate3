@@ -1,29 +1,54 @@
-# 더에셋스퀘어 — 부동산분양 2026 실제 현장 전문 분석
+# 더에셋스퀘어 — 부동산분양 2026 전문 분석 플랫폼
 
-> 더에셋스퀘어는 2026년 4월 기준 실제 분양중·분양예정 현장만 다루는 부동산분양 전문 플랫폼입니다.
+> 2026년 4월 기준 실제 분양중·분양예정 현장만 다루는 부동산분양 전문 플랫폼입니다. 아파트·오피스텔·상가·지식산업센터·토지·산업단지 6개 분양 유형을 전문가가 직접 분석합니다.
 
-## 아파트분양 2026 (실제 현장)
+## Pages
+
+- [홈페이지](https://realestate3.pages.dev/) — 전국 부동산분양 현장 총정리
+- [아파트분양](https://realestate3.pages.dev/apartment.html) — 2026년 전국 아파트 청약 현장 15곳
+- [오피스텔분양](https://realestate3.pages.dev/officetel.html) — 일산·고양 오피스텔 수익률 분석
+- [상가분양](https://realestate3.pages.dev/store.html) — 유동인구 분석 기반 상가 투자
+- [지식산업센터분양](https://realestate3.pages.dev/knowledge-center.html) — 세제 혜택 기업 입주 최적지
+- [토지분양](https://realestate3.pages.dev/land.html) — 개발 호재 지역 토지 매각
+- [산업단지분양](https://realestate3.pages.dev/industrial.html) — 제조·물류 기업 입주 조건
+
+## 아파트분양 현장 (2026년 4월 기준 실제 데이터)
 
 ### 청약 진행중
-- 라클라체자이드파인: 서울 동작구 노량진뉴타운, GS건설·SK에코플랜트, 369가구, 분양가상한제, 4/13 특별공급
-- 더샵신길센트럴시티: 서울 영등포구, 2054가구, 평당 5300만, 7호선 신풍역 역세권
-- 아크로드서초: 서울 서초구, 56가구 일반, 평당 7800만, 1099:1 경쟁률
-- 오티에르반포: 서울 서초구 반포동, 251가구, 후분양, 2026.7 입주
-- 래미안엘라비네: 서울 강서구 방화동, 삼성물산, 방화뉴타운
-- 더샵프리엘라: 서울, 324가구, 분양가 8.4~17.9억
-- 한화포레나부산당리: 부산 사하구
-- 창원자이더스카이: 경남 창원시, GS건설, 초고층
-- 호반써밋시흥거모B1: 경기 시흥시, 353가구, 분양가상한제
-- 해링턴플레이스오룡역: 대전 중구, 427가구
+- [라클라체자이드파인](https://realestate3.pages.dev/property/lacleche-xi-the-fine.html) — 서울 동작구 노량진뉴타운, GS건설·SK에코플랜트, 369가구, 4/13 특별공급
+- [더샵신길센트럴시티](https://realestate3.pages.dev/property/thesharp-singil.html) — 서울 영등포구, 2054가구, 평당 5300만, 7호선 신풍역
+- [아크로드서초](https://realestate3.pages.dev/property/acrod-seocho.html) — 서울 서초구, 56가구, 평당 7800만, 1099:1 경쟁률
+- [오티에르반포](https://realestate3.pages.dev/property/otier-banpo.html) — 서울 서초구 반포동, 251가구, 후분양, 2026.7 입주
+- [래미안엘라비네](https://realestate3.pages.dev/property/raemian-elavine.html) — 서울 강서구 방화뉴타운, 삼성물산
+- [더샵프리엘라](https://realestate3.pages.dev/property/thesharp-priella.html) — 서울, 324가구, 8.4~17.9억
+- [한화포레나부산당리](https://realestate3.pages.dev/property/hanwha-forena-dangri.html) — 부산 사하구
+- [창원자이더스카이](https://realestate3.pages.dev/property/changwon-xi-thesky.html) — 경남 창원시, GS건설 초고층
+- [호반써밋시흥거모B1](https://realestate3.pages.dev/property/hoban-summit-siheung.html) — 경기 시흥시, 353가구, 분양가상한제
+- [해링턴플레이스오룡역](https://realestate3.pages.dev/property/harrington-oryong.html) — 대전 중구, 427가구
 
 ### 4월 분양예정
-- 공덕역자이르네: 서울 마포구, 쿼드러플 역세권
-- 써밋더힐: 서울 동작구 흑석동, 한강 조망
-- 덕수궁롯데캐슬136: 서울 중구 순화동
-- 장위푸르지오마크원: 서울 성북구 장위동
-- 아크로리버스카이: 서울, DL이앤씨
+- [공덕역자이르네](https://realestate3.pages.dev/property/gongdeok-xi-lune.html) — 서울 마포구, 쿼드러플 역세권
+- [써밋더힐](https://realestate3.pages.dev/property/summit-the-hill.html) — 서울 동작구 흑석동, 한강 조망
+- [덕수궁롯데캐슬136](https://realestate3.pages.dev/property/deoksugung-lottecastle136.html) — 서울 중구 순화동
+- [장위푸르지오마크원](https://realestate3.pages.dev/property/jangwi-prugio-markone.html) — 서울 성북구 장위뉴타운
+- [아크로리버스카이](https://realestate3.pages.dev/property/acro-riversky.html) — 서울 한강변 프리미엄
+
+## 오피스텔분양 현장
+- [일산 힐스테이트 리버파크](https://realestate3.pages.dev/property/ilsan-hillstate.html) — 고양시 장항동, 680실, 한강 조망
+- [킨텍스 드림타워](https://realestate3.pages.dev/property/kintex-dream-tower.html) — 고양시 대화동, 520실
+- [장항 더리브 오피스텔](https://realestate3.pages.dev/property/janghang-thelib.html) — 고양시 장항동, 380실
+
+## 상가분양 현장
+- [고양 장항 스타필드시티](https://realestate3.pages.dev/property/goyang-starfield.html) — 연 2300만 유동인구, 220호실
+- [킨텍스 프라자](https://realestate3.pages.dev/property/kintex-plaza.html) — MICE 산업 수혜 상권, 150호실
+- [라페스타 스퀘어](https://realestate3.pages.dev/property/lafesta-square.html) — 일산 최대 상권, 180호실
+
+## 지식산업센터분양 현장
+- [풍동 지식산업센터](https://realestate3.pages.dev/property/pungdong-knowledge.html) — 일산IC 3분, 세제 혜택, 350실
+- [삼송 테크노밸리](https://realestate3.pages.dev/property/samsong-techno.html) — 삼송역 인접, 280실
+- [탄현 비즈센터](https://realestate3.pages.dev/property/tanhyun-biz.html) — 자유로 인접, 200실
 
 ## 연락처
 - 분양문의: 1666-6838
+- Email: theassetsquare@gmail.com
 - 메인 사이트: https://man-tjn.pages.dev/
-- AI 부동산 상담: https://man-tjn.pages.dev/
