@@ -51,7 +51,7 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 .card-link:hover{transform:translateY(-4px);box-shadow:0 4px 16px rgba(0,0,0,.12),0 8px 40px rgba(0,0,0,.08)}
 .card-img{position:relative;aspect-ratio:16/10;background:var(--g100);overflow:hidden}
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card-img .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.125rem;font-weight:700;color:#fff}
+.card-img .placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.125rem;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--navy),#3a5a8a)}
 .badge{position:absolute;top:.75rem;left:.75rem;font-size:.75rem;font-weight:700;padding:4px 8px;border-radius:4px;color:#fff;z-index:2}
 .badge-selling{background:var(--green)}
 .badge-upcoming{background:var(--yellow)}
@@ -66,7 +66,7 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 
 /* DETAIL PAGE */
 .detail-hero{position:relative;aspect-ratio:16/9;background:var(--g100);overflow:hidden}
-.detail-hero img,.detail-hero .placeholder{width:100%;height:100%;object-fit:cover}
+.detail-hero img,.detail-hero .placeholder{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--navy),#3a5a8a)}
 .detail-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:2rem 1rem 1rem;color:#fff}
 .detail-overlay h1{font-size:1.5rem;font-weight:800;margin-bottom:.25rem}
 .detail-overlay .loc{font-size:.875rem;opacity:.8}
@@ -98,10 +98,11 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 .btn-alert:hover{background:var(--navy);color:#fff}
 
 /* BOTTOM FIXED BARS */
-.bottom-phone{position:fixed;bottom:48px;left:0;width:100%;height:44px;background:#111;display:flex;align-items:center;justify-content:center;z-index:49}
-.bottom-phone a{color:#fff;font-size:1.125rem;font-weight:900;display:flex;align-items:center;gap:.5rem}
+.bottom-phone{position:fixed;bottom:48px;left:0;width:100%;height:auto;min-height:44px;background:#111;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.25rem .75rem;z-index:49;padding:.5rem 1rem}
+.bottom-phone a,.bottom-phone span{color:#fff;font-size:1.25rem;font-weight:900;display:inline-flex;align-items:center;gap:.375rem;min-height:44px}
+.bottom-phone .email{font-size:.875rem;font-weight:600;opacity:.8}
 .bottom-main{position:fixed;bottom:0;left:0;width:100%;height:48px;background:var(--blue);display:flex;align-items:center;justify-content:center;z-index:50}
-.bottom-main a{color:#fff;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:.375rem}
+.bottom-main a{color:#fff;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:.375rem;min-height:44px}
 
 /* FOOTER */
 .ft{background:var(--navy);color:rgba(255,255,255,.7);padding:2rem 1rem 6rem;text-align:center;font-size:.8125rem;line-height:1.8}
@@ -148,3 +149,19 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 @media(min-width:960px){.hero{padding:4rem 1rem}.hero h1{font-size:2.5rem}.detail-body{padding:2rem}.summary-grid{grid-template-columns:repeat(4,1fr)}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 .mt-1{margin-top:.5rem}.mt-2{margin-top:1rem}
+
+/* CLS Prevention */
+.card-img{aspect-ratio:16/10}
+.detail-hero{aspect-ratio:16/9}
+.hero{min-height:200px}
+.hd{min-height:52px}
+.nav{min-height:44px}
+.bottom-phone{min-height:44px}
+.bottom-main{min-height:48px}
+
+/* Core Web Vitals - contain paint */
+.card-link{contain:layout style}
+.property-card{contain:layout style}
+
+/* Reduce motion for accessibility */
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
