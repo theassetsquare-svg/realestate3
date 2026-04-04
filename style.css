@@ -8,6 +8,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:1rem;line-height:1.7;color:var(--g900);background:#fff;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+/* Kill any floating widgets/popups */
+.scroll-top,.cookie-popup,.floating-widget,.popup-banner{display:none!important}
 img{max-width:100%;height:auto;display:block}
 a{color:var(--navy);text-decoration:none}
 button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inherit;font-size:1rem}
@@ -67,7 +69,7 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 /* DETAIL PAGE */
 .detail-hero{position:relative;aspect-ratio:16/9;background:var(--g100);overflow:hidden}
 .detail-hero img,.detail-hero .placeholder{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--navy),#3a5a8a)}
-.detail-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:2rem 1rem 1rem;color:#fff}
+.detail-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:2rem 1rem 1rem;color:#fff;text-shadow:1px 1px 4px rgba(0,0,0,.8)}
 .detail-overlay h1{font-size:1.5rem;font-weight:800;margin-bottom:.25rem}
 .detail-overlay .loc{font-size:.875rem;opacity:.8}
 .detail-body{padding:1.5rem 1rem;max-width:800px;margin:0 auto}
@@ -97,12 +99,12 @@ button{min-height:44px;min-width:44px;cursor:pointer;border:none;font-family:inh
 .btn-alert{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:2px solid var(--navy);color:var(--navy);padding:.625rem 1.25rem;border-radius:8px;font-weight:700;font-size:.9375rem;min-height:44px}
 .btn-alert:hover{background:var(--navy);color:#fff}
 
-/* BOTTOM FIXED BARS */
-.bottom-phone{position:fixed;bottom:48px;left:0;width:100%;height:auto;min-height:44px;background:#111;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.25rem .75rem;z-index:49;padding:.5rem 1rem}
-.bottom-phone a,.bottom-phone span{color:#fff;font-size:1.25rem;font-weight:900;display:inline-flex;align-items:center;gap:.375rem;min-height:44px}
-.bottom-phone .email{font-size:.875rem;font-weight:600;opacity:.8}
-.bottom-main{position:fixed;bottom:0;left:0;width:100%;height:48px;background:var(--blue);display:flex;align-items:center;justify-content:center;z-index:50}
-.bottom-main a{color:#fff;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:.375rem;min-height:44px}
+/* BOTTOM FIXED BARS — NO OVERLAP */
+.bottom-phone{position:fixed;bottom:48px;left:0;width:100%;height:48px;background:#111;display:flex;align-items:center;justify-content:center;gap:.75rem;z-index:9999;padding:0 1rem}
+.bottom-phone a{color:#fff;font-size:20px;font-weight:900;text-decoration:none;display:inline-flex;align-items:center;gap:.375rem;min-height:48px}
+.bottom-phone .email{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.7)}
+.bottom-main{position:fixed;bottom:0;left:0;width:100%;height:48px;background:#2563EB;display:flex;align-items:center;justify-content:center;z-index:9999}
+.bottom-main a{color:#fff;font-size:16px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:.375rem;min-height:48px}
 
 /* FOOTER */
 .ft{background:var(--navy);color:rgba(255,255,255,.7);padding:2rem 1rem 6rem;text-align:center;font-size:.8125rem;line-height:1.8}
