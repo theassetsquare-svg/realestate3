@@ -12,6 +12,9 @@
  *  5. 페이지당 <h1> 정확히 1개, 플레이스홀더 H1("이 센터/상가/오피스텔" 등) 금지
  *  6. 키워드 스터핑: 본문 '부동산분양' 밀도 ≤ 3.2%
  *  7. (경고) <title> 70자 초과
+ *  8. 모든 JSON-LD(application/ld+json) 블록 JSON 파싱 유효성
+ *  9. BreadcrumbList JSON-LD 필수(홈 제외) — 리치결과/AI 탐색용
+ * 10. FAQ(.faq-q ≥2개) 있는 페이지는 FAQPage JSON-LD 필수 — 화면 Q&A 수와 일치
  */
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, resolve, relative } from 'node:path';
@@ -108,6 +111,41 @@ for (const file of htmlFiles()) {
       errors.push(`[스터핑] ${rel} '부동산분양' 밀도 ${density.toFixed(2)}% (>${DENSITY_LIMIT}%, ${kw}회/${body.length}자)`);
     }
   }
+
+  // 8) JSON-LD 유효성 + 타입 수집
+  const ldTypes = new Set();
+  for (const b of html.matchAll(/<script\s+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    try {
+      const obj = JSON.parse(b[1].trim());
+      for (const node of [].concat(obj['@graph'] || obj)) {
+        if (node && node['@type']) ldTypes.add(node['@type']);
+      }
+    } catch (e) {
+      errors.push(`[JSON-LD오류] ${rel} — 파싱 실패: ${e.message}`);
+    }
+  }
+
+  // 9) BreadcrumbList 필수 (홈 제외)
+  const isHome = rel === 'index.html';
+  if (!isHome && !ldTypes.has('BreadcrumbList')) {
+    errors.push(`[Breadcrumb누락] ${rel} — BreadcrumbList JSON-LD 없음 (node scripts/enrich-schema.mjs 실행)`);
+  }
+
+  // 10) FAQ 있으면 FAQPage 필수 + 개수 일치
+  const faqCount = (html.match(/class="faq-q"/gi) || []).length;
+  if (faqCount >= 2) {
+    if (!ldTypes.has('FAQPage')) {
+      errors.push(`[FAQ스키마누락] ${rel} — 화면 FAQ ${faqCount}개인데 FAQPage JSON-LD 없음 (node scripts/enrich-schema.mjs 실행)`);
+    } else {
+      const fm = html.match(/auto-schema:faq[\s\S]*?<script[^>]*>([\s\S]*?)<\/script>/i);
+      if (fm) {
+        try {
+          const q = JSON.parse(fm[1].trim()).mainEntity?.length || 0;
+          if (q !== faqCount) errors.push(`[FAQ불일치] ${rel} — 화면 ${faqCount}개  vs 스키마 ${q}개`);
+        } catch {}
+      }
+    }
+  }
 }
 
 // 3) 중복 검사
@@ -127,5 +165,5 @@ if (errors.length) {
   console.log('\n검증 실패. 위 오류를 수정하세요.\n');
   process.exit(1);
 }
-console.log(`\n✅ 통과 — 깨진링크 0 · 금지번호 0 · 중복제목 0 · 메타 완비 · 스터핑 없음\n`);
+console.log(`\n✅ 통과 — 깨진링크 0 · 금지번호 0 · 중복제목 0 · 메타 완비 · 스터핑 없음 · JSON-LD 유효 · Breadcrumb/FAQ 스키마 완비\n`);
 process.exit(0);

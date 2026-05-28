@@ -18,5 +18,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      # 1) 구조화데이터(JSON-LD) 자동 재생성 — idempotent
+      - name: Regenerate structured data
+        run: node scripts/enrich-schema.mjs
+
+      # 2) 스키마 드리프트 감지 — 커밋된 스키마가 최신이 아니면 실패
+      - name: Check schema freshness
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::구조화데이터가 최신이 아닙니다. 로컬에서 'node scripts/enrich-schema.mjs' 실행 후 커밋하세요."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "✅ 구조화데이터 최신 상태"
+
+      # 3) 정밀 SEO 검증 (스터핑/중복/링크/메타/JSON-LD/Breadcrumb/FAQ)
       - name: Run SEO audit
         run: node scripts/seo-audit.mjs
