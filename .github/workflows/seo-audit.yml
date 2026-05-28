@@ -40,3 +40,7 @@ jobs:
       # 4) 구글 Rich Results 규칙 검증 (Breadcrumb/FAQ 필수·권장 필드)
       - name: Validate Rich Results rules
         run: node scripts/validate-richresults.mjs --local
+
+      # 5) 버그/디버깅 스캔 (태그균형/중복id/보안rel/head필수/인코딩/접근성)
+      - name: Debug scan
+        run: node scripts/debug-scan.mjs
