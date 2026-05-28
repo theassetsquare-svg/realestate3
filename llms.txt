@@ -1,6 +1,6 @@
 # 더에셋스퀘어 — 부동산분양 2026 전문 분석 플랫폼
 
-> 2026년 4월 기준 실제 분양중·분양예정 현장만 다루는 부동산분양 전문 플랫폼입니다. 아파트·오피스텔·상가·지식산업센터·토지·산업단지 6개 분양 유형을 전문가가 직접 분석합니다.
+> 2026년 5월 기준 실제 분양중·분양예정 현장만 다루는 부동산분양 전문 플랫폼입니다. 아파트·오피스텔·상가·지식산업센터·토지·산업단지 6개 분양 유형을 전문가가 직접 분석합니다.
 
 ## Pages
 
@@ -48,7 +48,17 @@
 - [삼송 테크노밸리](https://realestate3.pages.dev/property/samsong-techno.html) — 삼송역 인접, 280실
 - [탄현 비즈센터](https://realestate3.pages.dev/property/tanhyun-biz.html) — 자유로 인접, 200실
 
+## 토지분양 현장
+- [창릉 상업용지](https://realestate3.pages.dev/property/changneung-land.html) — 고양창릉 3기 신도시 자족도시, 12필지, 330~1,650㎡
+- [파주 운정 단독주택용지](https://realestate3.pages.dev/property/paju-unjung-land.html) — GTX-A 운정중앙역세권, 점포겸용, 45필지
+- [킨텍스 복합용지](https://realestate3.pages.dev/property/kintex-complex-land.html) — 킨텍스·한류월드 인접 대형 복합개발, 5필지
+
+## 산업단지분양 현장
+- [향동 산업단지](https://realestate3.pages.dev/property/hyangdong-industrial.html) — 상암DMC 인접 도심형 산업용지, 120필지
+- [파주 LCD산업단지](https://realestate3.pages.dev/property/paju-lcd-industrial.html) — LG디스플레이 파주 클러스터 배후, 80필지
+- [김포 고촌 산업단지](https://realestate3.pages.dev/property/gimpo-gochon-industrial.html) — 서울 강서 인접 물류·제조 거점, 95필지
+
 ## 연락처
-- 분양문의: 1666-6838
+- 분양상담: https://theassetsquare.com/ (AI 무료 분양상담)
 - Email: theassetsquare@gmail.com
 - 메인 사이트: https://theassetsquare.com/
