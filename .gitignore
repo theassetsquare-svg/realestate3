@@ -1,0 +1,9 @@
+# Google service account keys / secrets — NEVER commit
+*.json.key
+*-gsc-*.json
+gsc-key.json
+theasset-gsc*.json
+client_secret*.json
+service-account*.json
+.env
+.env.*
