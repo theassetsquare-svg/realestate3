@@ -6,7 +6,7 @@ name: Self-Heal (자동복구)
 
 on:
   schedule:
-    - cron: '30 */12 * * *'   # 12시간마다 (감사 워크플로와 시차)
+    - cron: '0 1 * * 1'   # 매주 월요일 01:00 UTC (감사 1시간 뒤)
   workflow_dispatch:
 
 permissions:

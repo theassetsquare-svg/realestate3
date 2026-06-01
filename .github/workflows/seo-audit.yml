@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 */6 * * *'   # 6시간마다 (하루 4회) 자동 점검
+    - cron: '0 0 * * 1'   # 매주 월요일 00:00 UTC (=월 09:00 KST) 자동 점검
   workflow_dispatch:
 
 permissions:
