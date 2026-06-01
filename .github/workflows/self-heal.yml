@@ -1,0 +1,49 @@
+name: Self-Heal (자동복구)
+
+# 결정적으로 고칠 수 있는 문제는 사람 손 없이 자동 수정·커밋.
+# (구조화데이터 드리프트 등 — idempotent 재생성이라 안전)
+# 그 외 위험한 문제는 seo-audit.yml이 탐지→Issue→Gmail 알림.
+
+on:
+  schedule:
+    - cron: '30 */12 * * *'   # 12시간마다 (감사 워크플로와 시차)
+  workflow_dispatch:
+
+permissions:
+  contents: write             # 자동 수정 커밋
+
+jobs:
+  heal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 결정적 자동 수정: 구조화데이터 재생성 (idempotent)
+      - name: Auto-fix structured data
+        run: node scripts/enrich-schema.mjs
+
+      # 수정 후 반드시 검증 — 통과해야만 커밋(사이트 안 망가지게 안전판)
+      - name: Validate before commit
+        run: |
+          node scripts/seo-audit.mjs
+          node scripts/validate-richresults.mjs --local
+          node scripts/debug-scan.mjs
+
+      # 변경 있으면 자동 커밋·푸시
+      - name: Commit auto-heal
+        run: |
+          if git diff --quiet; then
+            echo "✅ 수정할 것 없음 — 사이트 정상"
+            exit 0
+          fi
+          git config user.name "self-heal-bot"
+          git config user.email "theassetsquare@gmail.com"
+          git add -A
+          git commit -m "auto-heal: 구조화데이터 자동 갱신 [skip ci]"
+          git push
+          echo "🔧 자동복구 완료 — 변경 커밋됨"
