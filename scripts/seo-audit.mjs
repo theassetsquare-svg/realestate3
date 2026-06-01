@@ -63,7 +63,9 @@ function checkLinks(file, html) {
     if (!url) continue;
     let target = url.startsWith('/') ? join(ROOT, url) : resolve(dir, url);
     if (url.endsWith('/') || url === '') target = join(target, 'index.html');
-    if (!existsSync(target)) {
+    // clean URL(확장자 없는 내부링크)은 Cloudflare가 .html로 서빙 → .html 붙여서도 확인
+    const ok = existsSync(target) || existsSync(target + '.html') || existsSync(join(target, 'index.html'));
+    if (!ok) {
       errors.push(`[깨진링크] ${relative(ROOT, file)} → "${m[1]}" (대상 없음)`);
     }
   }
