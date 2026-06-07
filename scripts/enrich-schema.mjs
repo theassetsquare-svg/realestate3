@@ -33,7 +33,7 @@ function plainText(s) {
 
 function htmlFiles() {
   const out = [];
-  for (const f of readdirSync(ROOT)) if (f.endsWith('.html')) out.push(join(ROOT, f));
+  for (const f of readdirSync(ROOT)) if (f.endsWith('.html') && f !== '404.html') out.push(join(ROOT, f));
   const pdir = join(ROOT, 'property');
   if (existsSync(pdir)) for (const f of readdirSync(pdir)) if (f.endsWith('.html')) out.push(join(pdir, f));
   return out.sort();

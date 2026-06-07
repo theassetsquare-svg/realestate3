@@ -34,7 +34,7 @@ const descriptions = new Map(); // desc -> [files]
 function htmlFiles() {
   const out = [];
   for (const f of readdirSync(ROOT)) {
-    if (f.endsWith('.html')) out.push(join(ROOT, f));
+    if (f.endsWith('.html') && f !== '404.html') out.push(join(ROOT, f));
   }
   const pdir = join(ROOT, 'property');
   if (existsSync(pdir)) {

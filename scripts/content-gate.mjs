@@ -106,6 +106,58 @@ for (const f of files) {
       violations++;
     }
   }
+
+  // B) og:image — favicon/SVG 금지, 실 래스터(png/jpg/webp)만 허용
+  for (const im of raw.matchAll(/og:image"\s+content="([^"]+)"/g)) {
+    const u = im[1];
+    if (/favicon/i.test(u) || /\.svg(\?|$)/i.test(u)) { console.error(`🔴 ${rel}: og:image가 favicon/SVG (${u})`); violations++; }
+    else if (!/\.(png|jpe?g|webp)(\?|$)/i.test(u)) { console.error(`🔴 ${rel}: og:image가 실 래스터 아님 (${u})`); violations++; }
+  }
+
+  // C) JSON-LD url = .html (이중 URL) 금지 — 클린만
+  for (const j of raw.matchAll(/"url":"(https:\/\/[^"]+\.html)"/g)) {
+    console.error(`🔴 ${rel}: JSON-LD url에 .html (이중URL) … "${j[1]}"`);
+    violations++;
+  }
+
+  // E) 엔티티 정합 — RealEstateListing name = h1
+  const nm = raw.match(/"@type":"RealEstateListing","name":"([^"]+)"/);
+  const h1 = raw.match(/<h1>([^<]+)<\/h1>/);
+  if (nm && h1 && nm[1].trim() !== h1[1].trim()) {
+    console.error(`🔴 ${rel}: 엔티티 불일치 name="${nm[1]}" ≠ h1="${h1[1]}"`);
+    violations++;
+  }
+}
+
+// A) soft-404 — _redirects catch-all이 200으로 홈을 반환하면 안 됨(진짜 404 필요)
+try {
+  const rd = readFileSync(join(ROOT, '_redirects'), 'utf8');
+  if (/\/\*\s+\/index\.html\s+200/.test(rd)) {
+    console.error('🔴 _redirects: catch-all "/* /index.html 200" = soft-404. "/* /404.html 404" 로 변경 필요');
+    violations++;
+  }
+  if (!/\b404\b/.test(rd)) {
+    console.error('🔴 _redirects: 404 처리 규칙 없음(존재하지 않는 경로 404 반환 필요)');
+    violations++;
+  }
+} catch { console.error('🔴 _redirects 파일 없음'); violations++; }
+
+// D) 카테고리 거짓 지역 — title 선두 지역이 카드 위치에 없으면 차단(전국/수도권 등 일반어는 허용)
+const GENERIC = ['전국', '수도권', '경기', '서울', '인천', '지방', '광역'];
+const CAT_KW = ['아파트분양', '오피스텔분양', '상가분양', '지식산업센터분양', '토지분양', '산업단지분양'];
+for (const cf of ['apartment', 'officetel', 'store', 'knowledge-center', 'land', 'industrial']) {
+  const p = join(ROOT, cf + '.html');
+  let html; try { html = readFileSync(p, 'utf8'); } catch { continue; }
+  const tt = (html.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
+  const kw = CAT_KW.find(k => tt.includes(k));
+  if (!kw) continue;
+  const region = tt.slice(0, tt.indexOf(kw)).trim().replace(/\s+/g, ' ');
+  if (!region || GENERIC.some(g => region.includes(g))) continue; // 일반어 허용
+  const locs = [...html.matchAll(/card-loc">([^<]+)</g)].map(m => m[1]).join(' ');
+  if (!locs.includes(region)) {
+    console.error(`🔴 ${cf}.html: 카테고리 거짓 지역 title="${region}…" 가 카드 위치에 없음 (실제: ${locs.slice(0,80)}…)`);
+    violations++;
+  }
 }
 
 if (violations) {

@@ -23,7 +23,7 @@ const errors = [], warns = [];
 
 function files() {
   const out = [];
-  for (const f of readdirSync(ROOT)) if (f.endsWith('.html')) out.push(join(ROOT, f));
+  for (const f of readdirSync(ROOT)) if (f.endsWith('.html') && f !== '404.html') out.push(join(ROOT, f));
   const p = join(ROOT, 'property');
   if (existsSync(p)) for (const f of readdirSync(p)) if (f.endsWith('.html')) out.push(join(p, f));
   return out.sort();
