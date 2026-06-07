@@ -57,6 +57,10 @@ const BANNED = [
   { re: /차익이\s*확정/g, msg: '시세차익 단정 "차익이 확정"' },
   { re: /차익이\s*내재/g, msg: '시세차익 단정 "차익이 내재"' },
   { re: /억\s*단위\s*(시세\s*)?차익/g, msg: '미검증 시세차익 "억 단위 차익"' },
+  { re: /선착순\s*마감/g, msg: '다크패턴 "선착순 마감"' },
+  { re: /곧\s*마감/g, msg: '다크패턴 "곧 마감"' },
+  { re: /남은\s*시간/g, msg: '다크패턴 카운트다운 "남은 시간"' },
+  { re: /단\s*\d+\s*자리/g, msg: '다크패턴 재고긴박 "단 N자리"' },
 ];
 
 // 합법 예외: "일몰 시점을 놓치면"(세제 일몰 안내) 은 FOMO 아님 → 임시 마스킹
@@ -73,10 +77,12 @@ const STALE_M = /(?<!\d)(\d{1,2})월\s*(분양예정|청약중)/g;
 
 let violations = 0;
 const files = htmlFiles(ROOT).sort();
+const pages = {}; // rel -> raw (크롤용)
 
 for (const f of files) {
   const rel = f.replace(ROOT + '/', '');
   const raw = readFileSync(f, 'utf8');
+  pages[rel] = raw;
   const text = maskLegit(raw);
 
   for (const { re, msg } of BANNED) {
@@ -127,6 +133,33 @@ for (const f of files) {
     console.error(`🔴 ${rel}: 엔티티 불일치 name="${nm[1]}" ≠ h1="${h1[1]}"`);
     violations++;
   }
+
+  // C) 내부링크 새탭 금지 — href="/..."(내부)에 target="_blank" 있으면 차단(본진 외부링크만 허용)
+  for (const a of raw.matchAll(/<a\s+href="(\/[^"]*)"[^>]*target="_blank"/g)) {
+    console.error(`🔴 ${rel}: 내부링크 새탭(_blank) … href="${a[1]}"`);
+    violations++;
+  }
+  // B) 본진 0홉 — theassetsquare.com 링크 최소 1개
+  if (!/href="https:\/\/theassetsquare\.com\//.test(raw)) {
+    console.error(`🔴 ${rel}: 본진(theassetsquare.com) 링크 없음(0홉 CTA 누락)`);
+    violations++;
+  }
+}
+
+// A) 고아·콘텐츠 막다른길 — property 상세 크롤
+const propRels = Object.keys(pages).filter(r => r.startsWith('property/'));
+for (const rel of propRels) {
+  const slug = rel.replace('property/', '').replace('.html', '');
+  // 막다른길: 자기 제외 상세→상세 아웃링크 < 3
+  const outs = new Set([...pages[rel].matchAll(/href="\/property\/([a-z0-9-]+)"/g)].map(m => m[1]).filter(s => s !== slug));
+  if (outs.size < 3) { console.error(`🔴 ${rel}: 콘텐츠 막다른길(상세→상세 아웃링크 ${outs.size}<3)`); violations++; }
+  // 고아: 타 페이지 inbound 0
+  let inbound = 0;
+  for (const [r2, h2] of Object.entries(pages)) {
+    if (r2 === rel) continue;
+    if (new RegExp(`href="/property/${slug}"`).test(h2)) { inbound++; break; }
+  }
+  if (!inbound) { console.error(`🔴 ${rel}: 고아(inbound 0)`); violations++; }
 }
 
 // A) soft-404 — _redirects catch-all이 200으로 홈을 반환하면 안 됨(진짜 404 필요)
