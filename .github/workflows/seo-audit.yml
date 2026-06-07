@@ -20,6 +20,10 @@ jobs:
         with:
           node-version: '22'
 
+      # 0) 콘텐츠 게이트 — 무료/체험·과장/FOMO·AI=사람·미검증 시세차익·종료청약"예정" 차단(재발 방지)
+      - name: Content gate (절대규칙/품질)
+        run: node scripts/content-gate.mjs
+
       # 1) 구조화데이터(JSON-LD) 자동 재생성 — idempotent
       - name: Regenerate structured data
         run: node scripts/enrich-schema.mjs
