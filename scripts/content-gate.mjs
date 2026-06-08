@@ -144,7 +144,21 @@ for (const f of files) {
     console.error(`🔴 ${rel}: 본진(theassetsquare.com) 링크 없음(0홉 CTA 누락)`);
     violations++;
   }
+  // A1) 반응형 — viewport meta 필수
+  if (!/name="viewport"\s+content="width=device-width/.test(raw)) {
+    console.error(`🔴 ${rel}: viewport meta 누락(반응형)`);
+    violations++;
+  }
 }
+
+// A1) 반응형 — style.css 바레 고정폭(width:NNNpx, max-/min- 아님) = 가로 오버플로 위험
+try {
+  const css = readFileSync(join(ROOT, 'style.css'), 'utf8');
+  for (const m of css.matchAll(/(^|[^-])width:\s*(\d{3,})px/g)) {
+    console.error(`🔴 style.css: 바레 고정폭 width:${m[2]}px (max-width 권장, 가로 오버플로 위험)`);
+    violations++;
+  }
+} catch {}
 
 // A) 고아·콘텐츠 막다른길 — property 상세 크롤
 const propRels = Object.keys(pages).filter(r => r.startsWith('property/'));

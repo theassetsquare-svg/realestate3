@@ -8,3 +8,4 @@ service-account*.json
 .env
 .env.*
 monitor-report.md
+data/sync-report.json
