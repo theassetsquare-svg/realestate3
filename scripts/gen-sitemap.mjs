@@ -8,7 +8,7 @@ import { join, dirname, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://realestate3.pages.dev';
+const BASE = 'https://n.nolcool.com';
 const today = process.env.GATE_TODAY || new Date().toISOString().slice(0, 10);
 
 const cats = ['apartment', 'officetel', 'store', 'knowledge-center', 'land', 'industrial'];

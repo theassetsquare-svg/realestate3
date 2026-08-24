@@ -5,7 +5,7 @@
  * 그대로 구현해 라이브(또는 로컬) 페이지에 적용한다.
  *
  * 사용:
- *   node scripts/validate-richresults.mjs            # 라이브(realestate3.pages.dev) 검증
+ *   node scripts/validate-richresults.mjs            # 라이브(n.nolcool.com) 검증
  *   node scripts/validate-richresults.mjs --local    # 로컬 파일 검증
  *
  * 검사 규칙 출처: developers.google.com/search/docs/appearance/structured-data
@@ -17,7 +17,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://realestate3.pages.dev';
+const BASE = 'https://n.nolcool.com';
 const LOCAL = process.argv.includes('--local');
 
 function pages() {

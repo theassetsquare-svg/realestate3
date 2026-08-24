@@ -8,7 +8,7 @@
 import crypto from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 
-const SITE = 'https://realestate3.pages.dev';
+const SITE = 'https://n.nolcool.com';
 const critical = [];   // 사이트 다운/404 등 → 메일
 const warn = [];       // CWV 낮음 등
 const info = [];       // 색인 현황 등

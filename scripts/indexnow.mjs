@@ -9,7 +9,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const HOST = 'realestate3.pages.dev';
+const HOST = 'n.nolcool.com';
 const KEY = 'a3f9c1e7b24d4f8a9e6c0b5d2f7a1c84';
 
 const sm = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');

@@ -16,7 +16,7 @@ import { join, dirname, resolve, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://realestate3.pages.dev';
+const BASE = 'https://n.nolcool.com';
 
 const CAT_NAME = {
   'apartment.html': '아파트분양', 'officetel.html': '오피스텔분양', 'store.html': '상가분양',

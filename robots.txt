@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://realestate3.pages.dev/sitemap.xml
+Sitemap: https://n.nolcool.com/sitemap.xml
 
 User-agent: Googlebot
 Allow: /

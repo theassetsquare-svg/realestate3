@@ -12,7 +12,7 @@ import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://realestate3.pages.dev';
+const BASE = 'https://n.nolcool.com';
 const CATPATH = { '아파트': 'apartment', '오피스텔': 'officetel', '상가': 'store', '지식산업센터': 'knowledge-center', '토지': 'land', '산업단지': 'industrial' };
 const esc = s => String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

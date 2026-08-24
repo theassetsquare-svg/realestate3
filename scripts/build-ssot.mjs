@@ -9,7 +9,7 @@ import { join, dirname, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PDIR = join(ROOT, 'property');
-const BASE = 'https://realestate3.pages.dev';
+const BASE = 'https://n.nolcool.com';
 
 function regionKey(s) {
   if (s.includes('서울')) { const m = s.match(/([가-힣]+구)/); return m ? '서울 ' + m[1] : '서울'; }
