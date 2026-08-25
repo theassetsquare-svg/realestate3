@@ -9,3 +9,6 @@ service-account*.json
 .env.*
 monitor-report.md
 data/sync-report.json
+
+# 도구용 의존성 — 배포물이 아니다
+node_modules/
