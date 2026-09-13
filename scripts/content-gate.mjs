@@ -4,7 +4,7 @@
  *
  * 빌드/배포 전 모든 HTML을 스캔해 아래를 차단한다.
  *   1) "무료" / "체험"            (절대규칙 #27)
- *   2) 과장·FOMO·미검증 최상급     (놓치면 후회, 100% 전문가, 역대 최고/역대급, 상승률 1위, 완판, 로또 …)
+ *   2) 과장·FOMO·미검증 최상급     (놓치면 후회, 100% 전문가, 역대 최고/역대급, 상승률 1위, 완판, 미제휴 …)
  *   3) AI=사람 표현               (전문가가 직접 방문/직접 분석, 발로 뛰 …)
  *   4) 미검증 시세차익 추정        (수억원 시세차익, 차익 확정/내재, 억 단위 차익 …)
  *   5) 종료 청약을 "예정"으로 표시 (오늘 기준 과거 연·월을 분양예정/청약중/당첨자 발표 예정으로 표기)
@@ -21,7 +21,7 @@ const ROOT = process.cwd();
 function htmlFiles(dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
-    if (name.startsWith('.') | name === 'node_modules') continue;
+    if (name.startsWith('.') || name === 'node_modules') continue;
     const p = join(dir, name);
     const s = statSync(p);
     if (s.isDirectory()) out.push(...htmlFiles(p));
@@ -31,7 +31,7 @@ function htmlFiles(dir) {
 }
 
 // 오늘 날짜 (CI 실측). GATE_TODAY로 테스트 주입 가능.
-const todayStr = process.env.GATE_TODAY | new Date().toISOString().slice(0, 10);
+const todayStr = process.env.GATE_TODAY || new Date().toISOString().slice(0, 10);
 const [tY, tM] = todayStr.split('-').map(Number);
 const todayNum = tY * 12 + tM; // 연·월 비교용
 
@@ -48,7 +48,7 @@ const BANNED = [
   { re: /상승률\s*1위/g, msg: '미검증 최상급 "상승률 1위"' },
   { re: /최고가를\s*갱신/g, msg: '미검증 최상급 "최고가를 갱신"' },
   { re: /완판/g, msg: '과장 "완판"' },
-  { re: /로또/g, msg: '과장 "로또"' },
+  { re: /로또/g, msg: '과장 "미제휴"' },
   { re: /이정표를\s*세운/g, msg: '과장 "이정표를 세운"' },
   { re: /전문가가\s*직접\s*(분석|현장|방문)/g, msg: 'AI=사람 "전문가가 직접 분석/방문"' },
   { re: /현장을\s*방문하고/g, msg: 'AI=사람 "현장을 방문하고"' },
@@ -60,7 +60,8 @@ const BANNED = [
   { re: /선착순\s*마감/g, msg: '다크패턴 "선착순 마감"' },
   { re: /곧\s*마감/g, msg: '다크패턴 "곧 마감"' },
   { re: /남은\s*시간/g, msg: '다크패턴 카운트다운 "남은 시간"' },
-  { re: /단\s*\d+\s*자리/g, msg: '다크패턴 재고긴박 "단 N자리"' }];
+  { re: /단\s*\d+\s*자리/g, msg: '다크패턴 재고긴박 "단 N자리"' },
+];
 
 // 합법 예외: "일몰 시점을 놓치면"(세제 일몰 안내) 은 FOMO 아님 → 임시 마스킹
 function maskLegit(text) {
@@ -115,7 +116,7 @@ for (const f of files) {
   // B) og:image — favicon/SVG 금지, 실 래스터(png/jpg/webp)만 허용
   for (const im of raw.matchAll(/og:image"\s+content="([^"]+)"/g)) {
     const u = im[1];
-    if (/favicon/i.test(u) | /\.svg(\?|$)/i.test(u)) { console.error(`🔴 ${rel}: og:image가 favicon/SVG (${u})`); violations++; }
+    if (/favicon/i.test(u) || /\.svg(\?|$)/i.test(u)) { console.error(`🔴 ${rel}: og:image가 favicon/SVG (${u})`); violations++; }
     else if (!/\.(png|jpe?g|webp)(\?|$)/i.test(u)) { console.error(`🔴 ${rel}: og:image가 실 래스터 아님 (${u})`); violations++; }
   }
 
@@ -194,11 +195,11 @@ const CAT_KW = ['아파트분양', '오피스텔분양', '상가분양', '지식
 for (const cf of ['apartment', 'officetel', 'store', 'knowledge-center', 'land', 'industrial']) {
   const p = join(ROOT, cf + '.html');
   let html; try { html = readFileSync(p, 'utf8'); } catch { continue; }
-  const tt = (html.match(/<title>([^<]+)<\/title>/) | [])[1] | '';
+  const tt = (html.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
   const kw = CAT_KW.find(k => tt.includes(k));
   if (!kw) continue;
   const region = tt.slice(0, tt.indexOf(kw)).trim().replace(/\s+/g, ' ');
-  if (!region | GENERIC.some(g => region.includes(g))) continue; // 일반어 허용
+  if (!region || GENERIC.some(g => region.includes(g))) continue; // 일반어 허용
   const locs = [...html.matchAll(/card-loc">([^<]+)</g)].map(m => m[1]).join(' ');
   if (!locs.includes(region)) {
     console.error(`🔴 ${cf}.html: 카테고리 거짓 지역 title="${region}…" 가 카드 위치에 없음 (실제: ${locs.slice(0,80)}…)`);
