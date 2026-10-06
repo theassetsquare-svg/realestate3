@@ -1,0 +1,20 @@
+{
+ "version": 1,
+ "include": [
+  "/*"
+ ],
+ "exclude": [
+  "/og/*",
+  "/favicon-64.png",
+  "/favicon.ico",
+  "/favicon.svg",
+  "/llms.txt",
+  "/robots.txt",
+  "/rss.xml",
+  "/sitemap.xml",
+  "/a3f9c1e7b24d4f8a9e6c0b5d2f7a1c84.txt",
+  "/main.js",
+  "/og-default.png",
+  "/style.css"
+ ]
+}
